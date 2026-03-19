@@ -1,0 +1,75 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  margin-right: var(--space-md);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background-color: #1A1A1A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.appTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ECEFF1;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Header right-side controls */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.addNoteBtn {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: #1565C0;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.addNoteBtn:hover {
+  background: #1976D2;
+}
+
+.addNoteBtn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Create-note form panel (inline, above the board) */
+.formPanel {
+  padding: var(--space-md) var(--space-lg) 0;
+}

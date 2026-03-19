@@ -1,0 +1,229 @@
+/* ── Note card ─────────────────────────────────────────────────────────── */
+.note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-md);
+  min-height: 200px;
+  width: 200px;
+  /* Top-right corner fold: clip away a 26×26px triangle */
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+  /* drop-shadow instead of box-shadow — respects clip-path outline */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.30));
+  transition: filter 0.18s ease, transform 0.18s ease;
+}
+
+.note:hover {
+  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.42));
+  transform: translateY(-5px) rotate(-0.7deg);
+}
+
+/* Fold shadow — darkens the triangular area just inside the cut */
+.note::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  /* 'to bottom left' → upper-right half transparent (clipped away),
+     lower-left half dark (visible inside cut area) = fold shadow */
+  background: linear-gradient(to bottom left, transparent 50%, rgba(0, 0, 0, 0.18) 50%);
+  pointer-events: none;
+}
+
+/* Note color variants */
+.note--yellow { background-color: #FFD600; }
+.note--pink   { background-color: #EC407A; }
+.note--blue   { background-color: #26C6DA; }
+.note--green  { background-color: #9CCC65; }
+.note--purple { background-color: #AB47BC; }
+.note--orange { background-color: #FFA726; }
+
+/* ── Text content ─────────────────────────────────────────────────────── */
+.text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  margin: 0 0 var(--space-sm);
+  word-break: break-word;
+  flex: 1;
+}
+
+/* ── Footer: author / date / actions ──────────────────────────────────── */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.65);
+  gap: 2px;
+}
+
+.author {
+  font-weight: 700;
+}
+
+.date {
+  opacity: 0.75;
+}
+
+/* ── Inline edit textarea ─────────────────────────────────────────────── */
+.editTextarea {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs);
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: var(--space-sm);
+  flex: 1;
+}
+
+.editTextarea:focus {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 1px;
+}
+
+/* ── Action buttons: visible on hover / focus-within ─────────────────── */
+.actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.note:hover .actions,
+.note:focus-within .actions {
+  opacity: 1;
+}
+
+.actionBtn {
+  font-size: 0.875rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.45);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.75);
+  transition: background-color 0.1s ease;
+}
+
+.actionBtn:hover {
+  background: rgba(255, 255, 255, 0.70);
+}
+
+.actionBtn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 1px;
+}
+
+.actionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.note:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.note--yellow { background-color: #FFF176; }
+.note--pink   { background-color: #F48FB1; }
+.note--blue   { background-color: #81D4FA; }
+.note--green  { background-color: #A5D6A7; }
+.note--purple { background-color: #CE93D8; }
+.note--orange { background-color: #FFCC80; }
+
+.text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  margin: 0 0 var(--space-sm);
+  word-break: break-word;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #424242;
+}
+
+.author {
+  font-weight: 600;
+}
+
+.date {
+  opacity: 0.75;
+}
+
+/* Inline edit */
+.editTextarea {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs);
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: var(--space-sm);
+}
+
+.editTextarea:focus {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 1px;
+}
+
+/* Action buttons (edit / delete / save / cancel) — visible on hover/focus */
+.actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.note:hover .actions,
+.note:focus-within .actions {
+  opacity: 1;
+}
+
+.actionBtn {
+  font-size: 0.875rem;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 2px 5px;
+  cursor: pointer;
+  color: #424242;
+  transition: background-color 0.1s ease;
+}
+
+.actionBtn:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.actionBtn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 1px;
+}
+
+.actionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

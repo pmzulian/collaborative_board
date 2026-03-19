@@ -1,0 +1,275 @@
+{
+  "notes": [
+    {
+      "id": "note_001",
+      "text": "Login flow is confusing — too many steps before reaching the dashboard",
+      "x": 120,
+      "y": 80,
+      "author": "user_1",
+      "color": "yellow",
+      "createdAt": "2026-03-10T09:05:00.000Z"
+    },
+    {
+      "id": "note_002",
+      "text": "We should add keyboard shortcuts for common actions",
+      "x": 320,
+      "y": 80,
+      "author": "user_2",
+      "color": "blue",
+      "createdAt": "2026-03-10T09:12:00.000Z"
+    },
+    {
+      "id": "note_003",
+      "text": "Color coding sticky notes helps with categorization",
+      "x": 520,
+      "y": 80,
+      "author": "user_3",
+      "color": "pink",
+      "createdAt": "2026-03-10T09:18:00.000Z"
+    },
+    {
+      "id": "note_004",
+      "text": "Onboarding tour would reduce support tickets significantly",
+      "x": 120,
+      "y": 220,
+      "author": "user_1",
+      "color": "green",
+      "createdAt": "2026-03-10T09:30:00.000Z"
+    },
+    {
+      "id": "note_005",
+      "text": "Export to PDF is a must for stakeholder reports",
+      "x": 320,
+      "y": 220,
+      "author": "user_4",
+      "color": "orange",
+      "createdAt": "2026-03-10T10:00:00.000Z"
+    },
+    {
+      "id": "note_006",
+      "text": "Real-time cursor presence boosts collaboration feeling",
+      "x": 520,
+      "y": 220,
+      "author": "user_2",
+      "color": "purple",
+      "createdAt": "2026-03-10T10:15:00.000Z"
+    },
+    {
+      "id": "note_007",
+      "text": "Mobile support is critical — 40% of users are on phones",
+      "x": 120,
+      "y": 360,
+      "author": "user_5",
+      "color": "yellow",
+      "createdAt": "2026-03-11T08:45:00.000Z"
+    },
+    {
+      "id": "note_008",
+      "text": "Search across boards is a top feature request",
+      "x": 320,
+      "y": 360,
+      "author": "user_3",
+      "color": "blue",
+      "createdAt": "2026-03-11T09:00:00.000Z"
+    },
+    {
+      "id": "note_009",
+      "text": "Undo/redo history should be unlimited or at least 50 steps",
+      "x": 520,
+      "y": 360,
+      "author": "user_1",
+      "color": "pink",
+      "createdAt": "2026-03-11T09:20:00.000Z"
+    },
+    {
+      "id": "note_010",
+      "text": "Templates gallery would accelerate session setup",
+      "x": 720,
+      "y": 80,
+      "author": "user_4",
+      "color": "green",
+      "createdAt": "2026-03-11T10:00:00.000Z"
+    },
+    {
+      "id": "note_011",
+      "text": "Voting on sticky notes is great but needs clearer UI",
+      "x": 720,
+      "y": 220,
+      "author": "user_2",
+      "color": "orange",
+      "createdAt": "2026-03-11T10:30:00.000Z"
+    },
+    {
+      "id": "note_012",
+      "text": "Accessibility: screen reader support for board canvas",
+      "x": 720,
+      "y": 360,
+      "author": "user_5",
+      "color": "purple",
+      "createdAt": "2026-03-11T11:00:00.000Z"
+    },
+    {
+      "id": "note_013",
+      "text": "Locking elements prevents accidental moves in live sessions",
+      "x": 120,
+      "y": 500,
+      "author": "user_3",
+      "color": "yellow",
+      "createdAt": "2026-03-12T08:00:00.000Z"
+    },
+    {
+      "id": "note_014",
+      "text": "Timer widget helps keep workshops on schedule",
+      "x": 320,
+      "y": 500,
+      "author": "user_1",
+      "color": "blue",
+      "createdAt": "2026-03-12T08:30:00.000Z"
+    },
+    {
+      "id": "note_015",
+      "text": "Guest access without sign-up reduces friction for new users",
+      "x": 520,
+      "y": 500,
+      "author": "user_4",
+      "color": "pink",
+      "createdAt": "2026-03-12T09:15:00.000Z"
+    },
+    {
+      "id": "note_016",
+      "text": "Board performance degrades with >200 elements — needs virtualization",
+      "x": 720,
+      "y": 500,
+      "author": "user_2",
+      "color": "orange",
+      "createdAt": "2026-03-12T10:00:00.000Z"
+    },
+    {
+      "id": "note_017",
+      "text": "Dark mode support is highly requested in user feedback",
+      "x": 120,
+      "y": 640,
+      "author": "user_5",
+      "color": "purple",
+      "createdAt": "2026-03-13T09:00:00.000Z"
+    },
+    {
+      "id": "note_018",
+      "text": "Drag-to-group should snap to a grid for cleaner layouts",
+      "x": 320,
+      "y": 640,
+      "author": "user_3",
+      "color": "green",
+      "createdAt": "2026-03-13T09:45:00.000Z"
+    },
+    {
+      "id": "note_019",
+      "text": "Comments on notes enable async collaboration post-session",
+      "x": 520,
+      "y": 640,
+      "author": "user_1",
+      "color": "yellow",
+      "createdAt": "2026-03-13T10:20:00.000Z"
+    },
+    {
+      "id": "note_020",
+      "text": "Notification system needed — users miss replies on notes",
+      "x": 720,
+      "y": 640,
+      "author": "user_4",
+      "color": "blue",
+      "createdAt": "2026-03-13T11:00:00.000Z"
+    },
+    {
+      "id": "note_021",
+      "text": "Tagging notes with labels would complement color coding",
+      "x": 120,
+      "y": 780,
+      "author": "user_2",
+      "color": "pink",
+      "createdAt": "2026-03-14T08:10:00.000Z"
+    },
+    {
+      "id": "note_022",
+      "text": "Breakout rooms for large workshops are essential",
+      "x": 320,
+      "y": 780,
+      "author": "user_5",
+      "color": "green",
+      "createdAt": "2026-03-14T09:00:00.000Z"
+    },
+    {
+      "id": "note_023",
+      "text": "Sticker pack integration would make brainstorming more fun",
+      "x": 520,
+      "y": 780,
+      "author": "user_3",
+      "color": "orange",
+      "createdAt": "2026-03-14T09:30:00.000Z"
+    },
+    {
+      "id": "note_024",
+      "text": "Offline mode for low-connectivity environments",
+      "x": 720,
+      "y": 780,
+      "author": "user_1",
+      "color": "purple",
+      "createdAt": "2026-03-14T10:45:00.000Z"
+    },
+    {
+      "id": "note_025",
+      "text": "Analytics dashboard to track engagement per session",
+      "x": 120,
+      "y": 920,
+      "author": "user_4",
+      "color": "yellow",
+      "createdAt": "2026-03-15T08:00:00.000Z"
+    },
+    {
+      "id": "note_026",
+      "text": "Auto-save on every change prevents data loss",
+      "x": 320,
+      "y": 920,
+      "author": "user_2",
+      "color": "blue",
+      "createdAt": "2026-03-15T09:00:00.000Z"
+    },
+    {
+      "id": "note_027",
+      "text": "Resizable sticky notes for longer content",
+      "x": 520,
+      "y": 920,
+      "author": "user_5",
+      "color": "pink",
+      "createdAt": "2026-03-15T10:00:00.000Z"
+    },
+    {
+      "id": "note_028",
+      "text": "Cluster detection to auto-group related notes by proximity",
+      "x": 720,
+      "y": 920,
+      "author": "user_3",
+      "color": "green",
+      "createdAt": "2026-03-16T08:30:00.000Z"
+    },
+    {
+      "id": "note_029",
+      "text": "Presenter mode to guide participants through the board",
+      "x": 120,
+      "y": 1060,
+      "author": "user_1",
+      "color": "orange",
+      "createdAt": "2026-03-17T09:00:00.000Z"
+    },
+    {
+      "id": "note_030",
+      "text": "WCAG 2.1 AA compliance should be a baseline requirement",
+      "x": 320,
+      "y": 1060,
+      "author": "user_4",
+      "color": "purple",
+      "createdAt": "2026-03-18T11:30:00.000Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,0 +1,24 @@
+.canvas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  align-items: flex-start;
+  align-content: flex-start;
+  min-height: 100%;
+  background-color: #F2F2F2;
+  /* Dot grid: 1 px dot every 24 px in both axes */
+  background-image: radial-gradient(circle, #BDBDBD 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #757575;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: var(--space-lg);
+}
