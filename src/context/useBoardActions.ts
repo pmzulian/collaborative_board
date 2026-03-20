@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 import { useBoardContext } from './BoardContext';
 import type { NoteColor, SortOption } from '../types';
 
+const HIGHLIGHT_DURATION_MS = 5_000;
+
 /** Provides stable, memoized action dispatchers for board interactions. */
 export function useBoardActions() {
   const { dispatch } = useBoardContext();
@@ -26,5 +28,13 @@ export function useBoardActions() {
     [dispatch]
   );
 
-  return { toggleAuthor, toggleColor, setSort, clearFilters };
+  const markNoteAsRecent = useCallback(
+    (id: string) => {
+      dispatch({ type: 'ADD_RECENT_NOTE', id });
+      setTimeout(() => dispatch({ type: 'EXPIRE_RECENT_NOTE', id }), HIGHLIGHT_DURATION_MS);
+    },
+    [dispatch]
+  );
+
+  return { toggleAuthor, toggleColor, setSort, clearFilters, markNoteAsRecent };
 }

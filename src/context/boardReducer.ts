@@ -6,6 +6,7 @@ export const initialState: BoardState = {
     colors: [],
   },
   sort: 'newest',
+  recentlyAddedIds: [],
 };
 
 export function boardReducer(state: BoardState, action: BoardAction): BoardState {
@@ -35,6 +36,12 @@ export function boardReducer(state: BoardState, action: BoardAction): BoardState
 
     case 'CLEAR_FILTERS':
       return { ...state, filters: { authors: [], colors: [] } };
+
+    case 'ADD_RECENT_NOTE':
+      return { ...state, recentlyAddedIds: [...state.recentlyAddedIds, action.id] };
+
+    case 'EXPIRE_RECENT_NOTE':
+      return { ...state, recentlyAddedIds: state.recentlyAddedIds.filter((id) => id !== action.id) };
 
     default:
       return state;

@@ -122,6 +122,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* ── New-note highlight (5 s background fade) ─────────────────────────── */
+@keyframes newCardHighlight {
+  0%   { background-color: #FFFDE7; box-shadow: 0 0 0 2px #F9A825; }
+  70%  { background-color: #FFFDE7; box-shadow: 0 0 0 2px #F9A825; }
+  100% { background-color: var(--color-surface-raised); box-shadow: none; }
+}
+
+.noteCard--new {
+  animation: newCardHighlight 5s ease-out forwards;
+}
+
 .noteText {
   font-size: 0.875rem;
   line-height: 1.55;

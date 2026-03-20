@@ -1,10 +1,13 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useFilteredNotes } from '../../hooks/useFilteredNotes';
+import { useBoardContext } from '../../context/BoardContext';
 import { StickyNote } from '../StickyNote/StickyNote';
 import styles from './BoardCanvas.module.css';
 
 export const BoardCanvas = memo(function BoardCanvas() {
   const { notes, isLoading, isError, error } = useFilteredNotes();
+  const { state } = useBoardContext();
+  const recentIds = useMemo(() => new Set(state.recentlyAddedIds), [state.recentlyAddedIds]);
 
   if (isLoading) {
     return (
@@ -37,7 +40,7 @@ export const BoardCanvas = memo(function BoardCanvas() {
       aria-label={`Board — ${notes.length} note${notes.length !== 1 ? 's' : ''}`}
     >
       {notes.map((note) => (
-        <StickyNote key={note.id} {...note} />
+        <StickyNote key={note.id} {...note} isNew={recentIds.has(note.id)} />
       ))}
     </section>
   );

@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import { useFilteredNotes } from '../../hooks/useFilteredNotes';
+import { useBoardContext } from '../../context/BoardContext';
 import { groupNotesByDay, formatTime } from '../../utils/dateHelpers';
 import type { StickyNote } from '../../types';
 import styles from './ActivityTimeline.module.css';
@@ -13,13 +14,15 @@ const COLOR_HEX: Record<string, string> = {
   orange: '#FFA726',
 };
 
-type NoteCardProps = Pick<StickyNote, 'id' | 'text' | 'author' | 'color' | 'createdAt'>;
+type NoteCardProps = Pick<StickyNote, 'id' | 'text' | 'author' | 'color' | 'createdAt'> & {
+  isNew?: boolean;
+};
 
-function NoteCard({ text, author, createdAt }: NoteCardProps) {
+function NoteCard({ text, author, createdAt, isNew }: NoteCardProps) {
   return (
     <article
-      className={styles.noteCard}
-      aria-label={`Note by ${author}: ${text}`}
+      className={`${styles.noteCard}${isNew ? ` ${styles['noteCard--new']}` : ''}`}
+      aria-label={`${isNew ? 'New note' : 'Note'} by ${author}: ${text}`}
     >
       <p className={styles.noteText}>{text}</p>
       <footer className={styles.noteMeta}>
@@ -34,6 +37,8 @@ function NoteCard({ text, author, createdAt }: NoteCardProps) {
 
 export const ActivityTimeline = memo(function ActivityTimeline() {
   const { notes, isLoading, isError, error } = useFilteredNotes();
+  const { state } = useBoardContext();
+  const recentIds = useMemo(() => new Set(state.recentlyAddedIds), [state.recentlyAddedIds]);
 
   const groups = useMemo(() => groupNotesByDay(notes), [notes]);
 
@@ -90,7 +95,7 @@ export const ActivityTimeline = memo(function ActivityTimeline() {
                       />
                       <span className={styles.connector} />
                     </div>
-                    <NoteCard {...note} />
+                    <NoteCard {...note} isNew={recentIds.has(note.id)} />
                   </li>
                 ))}
             </ol>

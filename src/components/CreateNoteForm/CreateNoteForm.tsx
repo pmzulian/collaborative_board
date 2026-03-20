@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useCreateNote } from '../../hooks/useCreateNote';
+import { useBoardActions } from '../../context/useBoardActions';
 import type { NoteColor } from '../../types';
 import styles from './CreateNoteForm.module.css';
 
@@ -15,6 +16,7 @@ export function CreateNoteForm({ onClose }: Props) {
   const [color, setColor] = useState<NoteColor>('yellow');
   const [isClosing, setIsClosing] = useState(false);
   const { mutate, isPending } = useCreateNote();
+  const { markNoteAsRecent } = useBoardActions();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -44,7 +46,8 @@ export function CreateNoteForm({ onClose }: Props) {
     mutate(
       { text: text.trim(), author: author.trim(), color, x: 0, y: 0 },
       {
-        onSuccess: () => {
+        onSuccess: (createdNote) => {
+          markNoteAsRecent(createdNote.id);
           setText('');
           setAuthor('');
           requestClose();

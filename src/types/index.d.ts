@@ -27,6 +27,8 @@ export interface FilterState {
 export interface BoardState {
   filters: FilterState;
   sort: SortOption;
+  /** IDs of notes created in the last 5 s — drives the "new note" highlight. */
+  recentlyAddedIds: string[];
 }
 
 export type BoardAction =
@@ -34,4 +36,6 @@ export type BoardAction =
   | { type: 'TOGGLE_AUTHOR'; author: string }
   | { type: 'TOGGLE_COLOR'; color: NoteColor }
   | { type: 'SET_SORT'; sort: SortOption }
-  | { type: 'CLEAR_FILTERS' };
+  | { type: 'CLEAR_FILTERS' }
+  | { type: 'ADD_RECENT_NOTE'; id: string }
+  | { type: 'EXPIRE_RECENT_NOTE'; id: string };

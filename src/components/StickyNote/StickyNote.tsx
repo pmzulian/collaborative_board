@@ -4,9 +4,11 @@ import { useDeleteNote } from '../../hooks/useDeleteNote';
 import { useUpdateNote } from '../../hooks/useUpdateNote';
 import styles from './StickyNote.module.css';
 
-type Props = Pick<StickyNoteType, 'id' | 'text' | 'author' | 'color' | 'createdAt'>;
+type Props = Pick<StickyNoteType, 'id' | 'text' | 'author' | 'color' | 'createdAt'> & {
+  isNew?: boolean;
+};
 
-export function StickyNote({ id, text, author, color, createdAt }: Props) {
+export function StickyNote({ id, text, author, color, createdAt, isNew }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(text);
   const { mutate: deleteNote, isPending: isDeleting } = useDeleteNote();
@@ -52,10 +54,11 @@ export function StickyNote({ id, text, author, color, createdAt }: Props) {
   }
 
   return (
-    <article
-      className={`${styles.note} ${styles[`note--${color}`]}`}
-      aria-label={`Note by ${author}: ${text}`}
-    >
+    <div className={`${styles.noteWrapper}${isNew ? ` ${styles['noteWrapper--new']}` : ''}`}>
+      <article
+        className={`${styles.note} ${styles[`note--${color}`]}`}
+        aria-label={`${isNew ? 'New note' : 'Note'} by ${author}: ${text}`}
+      >
       {isEditing ? (
         <textarea
           ref={textareaRef}
@@ -114,6 +117,7 @@ export function StickyNote({ id, text, author, color, createdAt }: Props) {
           </div>
         )}
       </footer>
-    </article>
+      </article>
+    </div>
   );
 }
