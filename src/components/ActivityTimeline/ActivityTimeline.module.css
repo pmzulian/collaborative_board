@@ -1,0 +1,150 @@
+.timeline {
+  padding: var(--space-xl) var(--space-xl) var(--space-xl) calc(var(--space-xl) + var(--space-md));
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+}
+
+.dayList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.dayGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.dayHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.dayLabel {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.dayCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background-color: #1565C0;
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dayLine {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.noteList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.noteEntry {
+  display: flex;
+  gap: var(--space-md);
+  position: relative;
+}
+
+.noteTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 16px;
+  padding-top: 14px; /* align dot with first line of card text */
+}
+
+.colorDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--color-surface-raised), 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.connector {
+  width: 2px;
+  flex: 1;
+  min-height: 12px;
+  background: var(--color-border);
+  margin-top: 6px;
+}
+
+/* Hide connector on the last note of each day */
+.noteEntry:last-child .connector {
+  display: none;
+}
+
+.noteCard {
+  flex: 1;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-sm);
+  transition: box-shadow 0.15s ease;
+}
+
+.noteCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.noteText {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs);
+  word-break: break-word;
+}
+
+.noteMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.noteAuthor {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.noteTime {
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  opacity: 0.75;
+}

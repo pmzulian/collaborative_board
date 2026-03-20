@@ -7,11 +7,15 @@ import { BoardCanvas } from './components/BoardCanvas/BoardCanvas'
 import { FilterPanel } from './components/FilterPanel/FilterPanel'
 import { SortControl } from './components/SortControl/SortControl'
 import { CreateNoteForm } from './components/CreateNoteForm/CreateNoteForm'
+import { ActivityTimeline } from './components/ActivityTimeline/ActivityTimeline'
 import logo from './assets/logo.svg'
 import styles from './App.module.css'
 
+type ViewMode = 'board' | 'timeline';
+
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false)
+  const [viewMode, setViewMode] = useState<ViewMode>('board')
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -26,6 +30,22 @@ function App() {
             />
             <h1 className={styles.appTitle}>Collaborative Board Explorer</h1>
             <div className={styles.headerActions}>
+              <div className={styles.viewToggle} role="group" aria-label="View mode">
+                <button
+                  className={`${styles.viewBtn} ${viewMode === 'board' ? styles.viewBtnActive : ''}`}
+                  onClick={() => setViewMode('board')}
+                  aria-pressed={viewMode === 'board'}
+                >
+                  Board
+                </button>
+                <button
+                  className={`${styles.viewBtn} ${viewMode === 'timeline' ? styles.viewBtnActive : ''}`}
+                  onClick={() => setViewMode('timeline')}
+                  aria-pressed={viewMode === 'timeline'}
+                >
+                  Timeline
+                </button>
+              </div>
               <button
                 className={styles.addNoteBtn}
                 onClick={() => setIsFormOpen(true)}
@@ -38,7 +58,7 @@ function App() {
           <div className={styles.body}>
             <FilterPanel />
             <main className={styles.main}>
-              <BoardCanvas />
+              {viewMode === 'board' ? <BoardCanvas /> : <ActivityTimeline />}
             </main>
           </div>
         </div>
