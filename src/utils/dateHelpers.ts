@@ -19,8 +19,9 @@ export function groupNotesByDay(notes: StickyNote[]): DayGroup[] {
     }
   }
 
+  // Array.from preserves Map insertion order, which reflects the sort order
+  // of the input notes array — day groups appear in the order of their first note.
   return Array.from(map.entries())
-    .sort(([a], [b]) => a.localeCompare(b))
     .map(([isoDate, notes]) => ({
       isoDate,
       label: formatDayLabel(isoDate),

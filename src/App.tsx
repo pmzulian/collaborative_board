@@ -5,7 +5,6 @@ import { queryClient } from './lib/queryClient'
 import { BoardProvider } from './context/BoardProvider'
 import { BoardCanvas } from './components/BoardCanvas/BoardCanvas'
 import { FilterPanel } from './components/FilterPanel/FilterPanel'
-import { SortControl } from './components/SortControl/SortControl'
 import { CreateNoteForm } from './components/CreateNoteForm/CreateNoteForm'
 import { ActivityTimeline } from './components/ActivityTimeline/ActivityTimeline'
 import logo from './assets/logo.svg'
@@ -52,7 +51,6 @@ function App() {
               >
                 + New note
               </button>
-              <SortControl />
             </div>
           </header>
           <div className={styles.body}>

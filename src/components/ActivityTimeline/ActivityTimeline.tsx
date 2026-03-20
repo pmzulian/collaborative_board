@@ -75,8 +75,6 @@ export const ActivityTimeline = memo(function ActivityTimeline() {
             </div>
             <ol className={styles.noteList} aria-label={`Notes from ${group.label}`}>
               {group.notes
-                .slice()
-                .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
                 .map((note) => (
                   <li key={note.id} className={styles.noteEntry}>
                     <div className={styles.noteTrack} aria-hidden="true">
