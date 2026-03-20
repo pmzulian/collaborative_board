@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useCreateNote } from '../../hooks/useCreateNote';
 import type { NoteColor } from '../../types';
 import styles from './CreateNoteForm.module.css';
@@ -13,9 +13,32 @@ export function CreateNoteForm({ onClose }: Props) {
   const [text, setText] = useState('');
   const [author, setAuthor] = useState('');
   const [color, setColor] = useState<NoteColor>('yellow');
+  const [isClosing, setIsClosing] = useState(false);
   const { mutate, isPending } = useCreateNote();
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  function handleSubmit(e: React.SubmitEvent) {
+  useEffect(() => {
+    dialogRef.current?.showModal();
+  }, []);
+
+  const requestClose = useCallback(() => {
+    setIsClosing(true);
+  }, []);
+
+  function handleAnimationEnd() {
+    if (isClosing) onClose();
+  }
+
+  function handleCancel(e: React.SyntheticEvent<HTMLDialogElement>) {
+    e.preventDefault();
+    requestClose();
+  }
+
+  function handleBackdropClick(e: React.MouseEvent<HTMLDialogElement>) {
+    if (e.target === dialogRef.current) requestClose();
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!text.trim() || !author.trim()) return;
     mutate(
@@ -24,15 +47,24 @@ export function CreateNoteForm({ onClose }: Props) {
         onSuccess: () => {
           setText('');
           setAuthor('');
-          onClose();
+          requestClose();
         },
       },
     );
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} aria-label="Add a new note">
-      <h2 className={styles.title}>New note</h2>
+    <dialog
+      ref={dialogRef}
+      className={`${styles.dialog} ${isClosing ? styles['dialog--closing'] : ''}`}
+      onCancel={handleCancel}
+      onClick={handleBackdropClick}
+      onAnimationEnd={handleAnimationEnd}
+      aria-labelledby="dialog-title"
+      aria-modal="true"
+    >
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h2 className={styles.title} id="dialog-title">New note</h2>
 
       <label className={styles.label} htmlFor="note-text">
         Text
@@ -84,7 +116,7 @@ export function CreateNoteForm({ onClose }: Props) {
       </fieldset>
 
       <div className={styles.actions}>
-        <button type="button" className={styles.cancelBtn} onClick={onClose}>
+        <button type="button" className={styles.cancelBtn} onClick={requestClose}>
           Cancel
         </button>
         <button
@@ -96,5 +128,6 @@ export function CreateNoteForm({ onClose }: Props) {
         </button>
       </div>
     </form>
+    </dialog>
   );
 }

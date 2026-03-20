@@ -5,6 +5,7 @@
   padding: var(--space-xl);
   align-items: flex-start;
   align-content: flex-start;
+  justify-content: space-evenly;
   min-height: 100%;
   background-color: #F2F2F2;
   /* Dot grid: 1 px dot every 24 px in both axes */

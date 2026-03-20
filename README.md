@@ -122,9 +122,10 @@ Filters and sort order are synchronous, local interaction state with no async co
 |---|---|
 | CSS Modules over SCSS | CSS Custom Properties replace SCSS variables. Native CSS nesting (Chrome 112+) replaces SCSS nesting. Removing `sass` eliminates a build dependency with zero functional benefit at this scale. |
 | `FilterPanel` as Compound Component | Avoids boolean prop proliferation. Sub-components share context implicitly; consumer controls layout. Follows Inversion of Control. |
-| `boardSelectors.ts` as pure functions | Framework-agnostic � easily unit tested without rendering or context. |
+| `boardSelectors.ts` as pure functions | Framework-agnostic — easily unit tested without rendering or context. |
 | `useMemo` on filtered list | `selectFilteredNotes` runs on every render if not memoized. With 100+ notes the filter+sort pass is non-trivial. |
 | json-server for persistence | Realistic REST API (GET/POST/PATCH/DELETE) with zero backend code. Makes TanStack Query mutations meaningful and demonstrable. |
+| Native `<dialog>` for the create-note modal | `showModal()` provides focus trap, top-layer stacking (immune to `z-index` and `overflow: hidden` ancestors), native `::backdrop`, Escape handling, scroll lock and correct ARIA semantics — all for zero JS and zero dependencies. A custom `<div role="dialog">` would require reimplementing every one of those manually. |
 
 ### Performance - what I implemented and what I'd do next
 

@@ -28,11 +28,9 @@ function App() {
             <div className={styles.headerActions}>
               <button
                 className={styles.addNoteBtn}
-                onClick={() => setIsFormOpen((v) => !v)}
-                aria-expanded={isFormOpen}
-                aria-controls="add-note-form"
+                onClick={() => setIsFormOpen(true)}
               >
-                {isFormOpen ? "Close" : "+ New note"}
+                + New note
               </button>
               <SortControl />
             </div>
@@ -40,15 +38,13 @@ function App() {
           <div className={styles.body}>
             <FilterPanel />
             <main className={styles.main}>
-              {isFormOpen && (
-                <div id="add-note-form" className={styles.formPanel}>
-                  <CreateNoteForm onClose={() => setIsFormOpen(false)} />
-                </div>
-              )}
               <BoardCanvas />
             </main>
           </div>
         </div>
+        {isFormOpen && (
+          <CreateNoteForm onClose={() => setIsFormOpen(false)} />
+        )}
       </BoardProvider>
     </QueryClientProvider>
   );
