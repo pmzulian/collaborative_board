@@ -148,12 +148,12 @@
   transform: scale(1.2);
 }
 
-.swatch--yellow { background-color: #FFD600; }
-.swatch--pink   { background-color: #EC407A; }
-.swatch--blue   { background-color: #26C6DA; }
-.swatch--green  { background-color: #9CCC65; }
-.swatch--purple { background-color: #AB47BC; }
-.swatch--orange { background-color: #FFA726; }
+.swatch--yellow { background-color: var(--color-note-yellow); }
+.swatch--pink   { background-color: var(--color-note-pink); }
+.swatch--blue   { background-color: var(--color-note-blue); }
+.swatch--green  { background-color: var(--color-note-green); }
+.swatch--purple { background-color: var(--color-note-purple); }
+.swatch--orange { background-color: var(--color-note-orange); }
 
 /* Actions */
 .actions {

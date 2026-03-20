@@ -43,13 +43,13 @@
   pointer-events: none;
 }
 
-/* Note color variants */
-.note--yellow { background-color: #FFF176; }
-.note--pink   { background-color: #F48FB1; }
-.note--blue   { background-color: #81D4FA; }
-.note--green  { background-color: #A5D6A7; }
-.note--purple { background-color: #CE93D8; }
-.note--orange { background-color: #FFCC80; }
+/* Note color variants — consume L0 tokens from index.css */
+.note--yellow { background-color: var(--color-note-yellow); }
+.note--pink   { background-color: var(--color-note-pink); }
+.note--blue   { background-color: var(--color-note-blue); }
+.note--green  { background-color: var(--color-note-green); }
+.note--purple { background-color: var(--color-note-purple); }
+.note--orange { background-color: var(--color-note-orange); }
 
 .text {
   font-size: 0.875rem;

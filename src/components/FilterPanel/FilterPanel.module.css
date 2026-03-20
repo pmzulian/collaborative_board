@@ -112,3 +112,10 @@
   border-color: #ECEFF1;
   transform: scale(1.15);
 }
+
+.swatch--yellow { background-color: var(--color-note-yellow); }
+.swatch--pink   { background-color: var(--color-note-pink); }
+.swatch--blue   { background-color: var(--color-note-blue); }
+.swatch--green  { background-color: var(--color-note-green); }
+.swatch--purple { background-color: var(--color-note-purple); }
+.swatch--orange { background-color: var(--color-note-orange); }

@@ -5,15 +5,6 @@ import { groupNotesByDay, formatTime } from '../../utils/dateHelpers';
 import type { StickyNote } from '../../types';
 import styles from './ActivityTimeline.module.css';
 
-const COLOR_HEX: Record<string, string> = {
-  yellow: '#FFD600',
-  pink: '#EC407A',
-  blue: '#26C6DA',
-  green: '#9CCC65',
-  purple: '#AB47BC',
-  orange: '#FFA726',
-};
-
 type NoteCardProps = Pick<StickyNote, 'id' | 'text' | 'author' | 'color' | 'createdAt'> & {
   isNew?: boolean;
 };
@@ -90,8 +81,7 @@ export const ActivityTimeline = memo(function ActivityTimeline() {
                   <li key={note.id} className={styles.noteEntry}>
                     <div className={styles.noteTrack} aria-hidden="true">
                       <span
-                        className={styles.colorDot}
-                        style={{ backgroundColor: COLOR_HEX[note.color] }}
+                        className={`${styles.colorDot} ${styles[`colorDot--${note.color}`]}`}
                       />
                       <span className={styles.connector} />
                     </div>

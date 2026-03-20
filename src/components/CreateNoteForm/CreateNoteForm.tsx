@@ -2,9 +2,8 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useCreateNote } from '../../hooks/useCreateNote';
 import { useBoardActions } from '../../context/useBoardActions';
 import type { NoteColor } from '../../types';
+import { NOTE_COLORS } from '../../lib/tokens';
 import styles from './CreateNoteForm.module.css';
-
-const COLORS: NoteColor[] = ['yellow', 'pink', 'blue', 'green', 'purple', 'orange'];
 
 interface Props {
   onClose: () => void;
@@ -98,7 +97,7 @@ export function CreateNoteForm({ onClose }: Props) {
       <fieldset className={styles.colorGroup}>
         <legend className={styles.label}>Color</legend>
         <div className={styles.colorOptions}>
-          {COLORS.map((c) => (
+          {NOTE_COLORS.map((c) => (
             <label key={c} className={styles.colorOption}>
               <input
                 type="radio"

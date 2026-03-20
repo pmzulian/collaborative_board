@@ -1,6 +1,4 @@
-
 /* Global design tokens - Collaborative Board */
-/* L0 primitives -> L1 semantic custom properties */
 
 :root {
   /* Colors */
@@ -10,6 +8,14 @@
   --color-text-secondary: #616161;
   --color-border:         rgba(0, 0, 0, 0.12);
   --color-focus-ring:     #1565C0;
+
+  /* L0 — Note color primitives */
+  --color-note-yellow: #FFF176;
+  --color-note-pink:   #F48FB1;
+  --color-note-blue:   #81D4FA;
+  --color-note-green:  #A5D6A7;
+  --color-note-purple: #CE93D8;
+  --color-note-orange: #FFCC80;
 
   /* Spacing scale */
   --space-xs: 4px;
