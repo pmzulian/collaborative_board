@@ -13,8 +13,8 @@ import iconChevronRight from '../../assets/chevron-right.svg';
 import styles from './FilterPanel.module.css';
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'newest',     label: 'Newest first' },
-  { value: 'oldest',     label: 'Oldest first' },
+  { value: 'newest', label: 'Newest first' },
+  { value: 'oldest', label: 'Oldest first' },
   { value: 'position-x', label: 'Position (left → right)' },
   { value: 'position-y', label: 'Position (top → bottom)' },
 ];

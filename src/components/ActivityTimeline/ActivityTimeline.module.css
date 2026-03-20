@@ -122,21 +122,18 @@
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
   margin-bottom: var(--space-sm);
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow 1.5s ease-out, background-color 1.5s ease-out, border-color 1.5s ease-out;
 }
 
 .noteCard:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-@keyframes newCardHighlight {
-  0%   { background-color: #FFFDE7; box-shadow: 0 0 0 2px #F9A825; }
-  70%  { background-color: #FFFDE7; box-shadow: 0 0 0 2px #F9A825; }
-  100% { background-color: var(--color-surface-raised); box-shadow: none; }
-}
-
 .noteCard--new {
-  animation: newCardHighlight 5s ease-out forwards;
+  background-color: #FFFDE7;
+  border-color: #F9A825;
+  box-shadow: 0 0 0 2px #F9A825;
+  transition: none;
 }
 
 .noteText {

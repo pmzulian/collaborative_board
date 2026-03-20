@@ -1,7 +1,7 @@
 .noteWrapper {
   display: inline-flex;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
-  transition: filter 0.18s ease, transform 0.18s ease;
+  transition: filter 0.18s ease, transform 0.18s ease, box-shadow 1.5s ease-out;
 }
 
 .noteWrapper:hover {
@@ -9,14 +9,9 @@
   transform: translateY(-4px) rotate(-0.5deg);
 }
 
-@keyframes newNoteRing {
-  0%   { box-shadow: 0 0 0 3px rgba(245, 124, 0, 1),   0 0 12px 2px rgba(245, 124, 0, 0.55); }
-  60%  { box-shadow: 0 0 0 3px rgba(245, 124, 0, 1),   0 0 12px 2px rgba(245, 124, 0, 0.55); }
-  100% { box-shadow: 0 0 0 3px rgba(245, 124, 0, 0),   0 0 12px 2px rgba(245, 124, 0, 0); }
-}
-
 .noteWrapper--new {
-  animation: newNoteRing 5s linear forwards;
+  box-shadow: 0 0 0 3px rgba(245, 124, 0, 1), 0 0 12px 2px rgba(245, 124, 0, 0.55);
+  transition: filter 0.18s ease, transform 0.18s ease, box-shadow 0s;
 }
 
 .note {

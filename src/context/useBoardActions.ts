@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useBoardContext } from './BoardContext';
 import type { NoteColor, SortOption } from '../types';
 
-const HIGHLIGHT_DURATION_MS = 5_000;
+const HIGHLIGHT_DURATION_MS = 30_000;
 
 /** Provides stable, memoized action dispatchers for board interactions. */
 export function useBoardActions() {
