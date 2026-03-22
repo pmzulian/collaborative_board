@@ -10,21 +10,21 @@ export function ColorSwatches() {
   return (
     <fieldset className={styles.group}>
       <legend className={styles.groupLabel}>Color</legend>
-      <div className={styles.swatches} role="list">
+      <ul className={styles.swatches}>
         {NOTE_COLORS.map((color) => {
           const active = state.filters.colors.includes(color);
           return (
-            <button
-              key={color}
-              role="listitem"
-              className={`${styles.swatch} ${styles[`swatch--${color}`]} ${active ? styles['swatch--active'] : ''}`}
-              onClick={() => toggleColor(color)}
-              aria-pressed={active}
-              aria-label={`Filter by ${color} notes`}
-            />
+            <li key={color}>
+              <button
+                className={`${styles.swatch} ${styles[`swatch--${color}`]} ${active ? styles['swatch--active'] : ''}`}
+                onClick={() => toggleColor(color)}
+                aria-pressed={active}
+                aria-label={`Filter by ${color} notes`}
+              />
+            </li>
           );
         })}
-      </div>
+      </ul>
     </fieldset>
   );
 }

@@ -161,7 +161,7 @@ Filters and sort order are synchronous, local interaction state with no async co
 ### UX decisions
 
 - **Sidebar filter panel**: Persistent sidebar keeps filters always visible. Familiar from e-commerce faceted search; reduces cognitive load vs. a modal or popover.
-- **Multi-select additive filters**: Selecting multiple authors/colors shows notes matching any of them (OR logic) � useful for exploration.
+- **Multi-select additive filters**: Selecting multiple authors/colors shows notes matching any of them (OR logic), useful for exploration.
 - **"Clear all" link**: Only appears when filters are active, reducing visual noise. Positioned in the header for proximity to what it resets.
 - **Sort in the header**: Sort is a global view decision, not a per-category filter, so it lives in the app header.
 - **Grid layout over canvas**: Wrapping flex grid instead of absolute `x`/`y` positioning. Readable, accessible, testable. Coordinates are preserved in the data for a future canvas mode.
@@ -191,9 +191,10 @@ All generated code was reviewed and intentionally accepted or modified.
 1. Complete CRUD UI (create note form, inline edit, delete confirmation)
 2. Activity timeline: Group notes by day using `groupNotesByDay`
 3. Keyboard navigation on the board grid (arrow keys between notes)
-4. Playwright e2e for the full filter ? sort ? clear flow
-5. Optimistic updates on mutations
-6. Responsive layout (collapsible sidebar on mobile)
+4. Unit tests for `dateHelpers.ts` (`groupNotesByDay`, `formatDayLabel`, `formatTime`) — excluded from this sample due to the overhead of making `toLocaleTimeString` deterministic across environments
+5. Playwright e2e for the full filter ? sort ? clear flow
+6. Optimistic updates on mutations
+7. Responsive layout (collapsible sidebar on mobile)
 
 ### Time spent
 
