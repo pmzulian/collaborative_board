@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { queryClient } from './lib/queryClient'
@@ -15,6 +15,20 @@ type ViewMode = 'board' | 'timeline';
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [viewMode, setViewMode] = useState<ViewMode>('board')
+  const addNoteRef = useRef<HTMLButtonElement>(null)
+  const wasFormOpenRef = useRef(false)
+
+  // Restore focus to the opener button AFTER React commits the unmount
+  useEffect(() => {
+    if (wasFormOpenRef.current && !isFormOpen) {
+      addNoteRef.current?.focus()
+    }
+    wasFormOpenRef.current = isFormOpen
+  }, [isFormOpen])
+
+  function handleCloseForm() {
+    setIsFormOpen(false)
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -46,6 +60,7 @@ function App() {
                 </button>
               </div>
               <button
+                ref={addNoteRef}
                 className={styles.addNoteBtn}
                 onClick={() => setIsFormOpen(true)}
               >
@@ -61,7 +76,7 @@ function App() {
           </div>
         </div>
         {isFormOpen && (
-          <CreateNoteForm onClose={() => setIsFormOpen(false)} />
+          <CreateNoteForm onClose={handleCloseForm} />
         )}
       </BoardProvider>
     </QueryClientProvider>
