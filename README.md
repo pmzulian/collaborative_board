@@ -60,9 +60,10 @@ npm run build
 | Load & render notes | Via TanStack Query against json-server |
 | Filter by author | Accessible checkboxes, multi-select |
 | Filter by color | Color swatches with aria-pressed |
-| Sort | Newest / Oldest / Position X / Position Y |
+| Sort | Newest / Oldest / Position X / Position Y — inside FilterPanel sidebar |
 | Clear filters | One-click reset with visible indicator |
 | Empty state | Accessible aria-live status message |
+| Activity timeline | Notes grouped by day with relative timestamps |
 
 ---
 
@@ -143,9 +144,11 @@ src/
 +-- components/          # Presentational - receives data via props or hooks
    +-- StickyNote/      # Pure display, 6 color variants, aria-label
    +-- BoardCanvas/     # Renders filtered note list, handles empty state
-   +-- FilterPanel/     # Compound Component: AuthorList + ColorSwatches
-   +-- SortControl/     # Accessible <select> with label
-+-- features/board/      # Domain logic
+   +-- FilterPanel/     # Compound Component: AuthorList + ColorSwatches + Sort (sidebar)
+   +-- SortControl/     # Standalone sort <select> (not mounted — sort lives in FilterPanel)
+   +-- ActivityTimeline/# Notes grouped by day; lazy-loaded on demand
+   +-- CreateNoteForm/  # Modal form for creating new notes
++-- context/             # UI state — React Context + useReducer
    +-- boardReducer.ts  # Pure reducer - filters + sort only (UI state)
    +-- boardSelectors.ts# Derived state (filtered+sorted list)
    +-- BoardProvider.tsx# Context + useReducer provider
@@ -192,6 +195,10 @@ Filters and sort order are synchronous, local interaction state with no async co
 - `useCallback` on all action dispatchers in `useBoardActions`
 - CSS transitions instead of JS animations for hover effects
 - TanStack Query `staleTime: 30s`: avoids redundant refetches on tab focus
+- **Critical CSS** (`public/critical.css`): design tokens + reset served as a tiny blocking stylesheet (~1.5 KiB, ~13 ms) so the main component CSS bundle does not block FCP
+- **Non-blocking CSS** (`nonBlockingCssPlugin` in `vite.config.ts`): transforms Vite's injected `<link rel="stylesheet">` into `<link rel="preload" as="style">` in the production build, removing the component CSS bundle from the critical render path
+- **`React.lazy()` + `Suspense`** on `ActivityTimeline`: the timeline JS + CSS chunks (~4.5 KiB + ~2.9 KiB) are excluded from the initial bundle and fetched only when the user opens the Timeline tab
+- **`prefetchQuery` in `main.tsx`**: fires the `/notes` fetch on the first line of the bundle, overlapping it with React initialization instead of waiting until `useQuery` mounts
 
 **Would do next with more time:**
 - **Virtualization**: For 500+ notes, replace the flex-wrap grid with `@tanstack/react-virtual`. The current DOM approach degrades beyond ~300 simultaneous elements.
@@ -220,7 +227,7 @@ Filters and sort order are synchronous, local interaction state with no async co
 - **Sidebar filter panel**: Persistent sidebar keeps filters always visible. Familiar from e-commerce faceted search; reduces cognitive load vs. a modal or popover.
 - **Multi-select additive filters**: Selecting multiple authors/colors shows notes matching any of them (OR logic), useful for exploration.
 - **"Clear all" link**: Only appears when filters are active, reducing visual noise. Positioned in the header for proximity to what it resets.
-- **Sort in the header**: Sort is a global view decision, not a per-category filter, so it lives in the app header.
+- **Sort in the filter sidebar**: Sort is co-located with the author and color filters inside the collapsible `FilterPanel` sidebar. Grouping all view-shaping controls together reduces the number of distinct UI regions the user must visit and keeps the header uncluttered.
 - **Grid layout over canvas**: Wrapping flex grid instead of absolute `x`/`y` positioning. Readable, accessible, testable. Coordinates are preserved in the data for a future canvas mode.
 - **Fixed note width (200px)**: Consistent width creates a scannable grid. Longer content wraps vertically.
 
@@ -246,12 +253,11 @@ All generated code was reviewed and intentionally accepted or modified.
 | axe-core excluded | Targeted a11y assertions cover the key WCAG criteria; avoids false positives | Add in CI with a tuned rule set when the project scales |
 
 **Next steps with more time:**
-1. Activity timeline: Group notes by day using `groupNotesByDay`
-2. Keyboard navigation on the board grid (arrow keys between notes)
-3. Unit tests for `dateHelpers.ts` (`groupNotesByDay`, `formatDayLabel`, `formatTime`) — excluded from this sample due to the overhead of making `toLocaleTimeString` deterministic across environments
-4. Playwright e2e for the full filter → sort → clear flow
-5. Optimistic updates on mutations
-6. Responsive layout (collapsible sidebar on mobile)
+1. Keyboard navigation on the board grid (arrow keys between notes)
+2. Unit tests for `dateHelpers.ts` (`groupNotesByDay`, `formatDayLabel`, `formatTime`) — excluded from this sample due to the overhead of making `toLocaleTimeString` deterministic across environments
+3. Playwright e2e for the full filter → sort → clear flow
+4. Optimistic updates on mutations
+5. Responsive layout (collapsible sidebar on mobile)
 
 ### Time spent
 
@@ -262,8 +268,10 @@ All generated code was reviewed and intentionally accepted or modified.
 | Components (StickyNote, BoardCanvas, FilterPanel, SortControl) | 45 min |
 | Styling (CSS Modules, design tokens) | 30 min |
 | Architecture review and migration decisions | 20 min |
-| Documentation (README, instructions files) | 30 min |
-| **Total** | **~3h 00min** |
+| ActivityTimeline + CreateNoteForm + E2E tests | 45 min |
+| Performance optimizations (critical CSS, lazy loading, prefetch) | 30 min |
+| Documentation (README, PERFORMANCE.md, instructions files) | 30 min |
+| **Total** | **~4h 15min** |
 
 ---
 
