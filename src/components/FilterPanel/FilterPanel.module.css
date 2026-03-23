@@ -233,7 +233,7 @@
 .group {
   border: none;
   margin: 0;
-  padding: 0;
+  padding: 0.2rem;
 }
 
 .groupLabel {
@@ -274,6 +274,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .swatch {
