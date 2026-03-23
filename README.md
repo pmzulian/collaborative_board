@@ -39,6 +39,13 @@ npm run test:run      # Single run (CI)
 npm run test:coverage # Coverage report
 ```
 
+### Run E2E tests (Playwright)
+```bash
+# Requires the dev server AND json-server to be running first:
+npm run start           # starts both concurrently
+npm run test:e2e        # runs all Playwright tests
+```
+
 ### Build for production
 ```bash
 npm run build
@@ -56,6 +63,56 @@ npm run build
 | Sort | Newest / Oldest / Position X / Position Y |
 | Clear filters | One-click reset with visible indicator |
 | Empty state | Accessible aria-live status message |
+
+---
+
+## Testing
+
+### Unit & Integration — Vitest + React Testing Library
+
+| File | Tests | Scope |
+|---|---|---|
+| `boardReducer.test.ts` | 20 | Pure reducer — all action types |
+| `boardSelectors.test.ts` | 19 | Derived state with filters + sort |
+| `FilterPanel.test.tsx` | 27 | AuthorList, ColorSwatches, SortControl integration |
+| `StickyNote.test.tsx` | 12 | View mode, inline edit, delete |
+| `CreateNoteForm.test.tsx` | 9 | Rendering, validation, submit/cancel interactions |
+| `BoardCanvas.test.tsx` | 4 | Smoke: loading, notes list, empty state, error |
+| `ActivityTimeline.test.tsx` | 4 | Smoke: loading, articles, empty state, error |
+| **Total** | **95** | |
+
+### E2E — Playwright (Chromium)
+
+Two spec files cover critical user flows and keyboard accessibility:
+
+**`e2e/board.spec.ts`** — CRUD and filtering flows:
+
+| Test | What it verifies |
+|---|---|
+| App loads and renders notes | Page title visible, at least one note on screen |
+| Create a note | POST via form → new note appears on the board |
+| Filter by author | Only notes from selected author remain visible |
+| Edit a note (inline) | PATCH via inline edit → updated text persists |
+| Delete a note | DELETE → note removed from the board |
+
+**`e2e/accessibility-e2e.spec.ts`** — Keyboard and focus management:
+
+| Test | What it verifies |
+|---|---|
+| Tab order reaches interactive controls | Filter checkboxes, sort select, board notes all reachable |
+| "New note" button is keyboard-reachable | Button can receive focus programmatically |
+| Focus is trapped inside the dialog | `showModal()` native trap keeps focus inside while open |
+| Escape triggers the closing animation | Dialog is hidden after Escape key |
+| Focus returns to opener on close | WCAG 2.1 SC 2.4.3 — opener button regains focus after dialog closes |
+
+### axe-core — intentionally excluded
+
+`@axe-core/playwright` was evaluated and deliberately left out. The keyboard/focus tests in `accessibility-e2e.spec.ts` already cover the WCAG criteria most relevant to this application (focus order, focus trap, focus return, keyboard reachability). Axe-core catches a broader surface of automated rules, but it also introduces:
+
+- An additional runtime dependency
+- Overlap with the manual ARIA and label checks already in the RTL suite
+
+The trade-off is intentional: targeted, readable assertions over a blanket automated audit. Axe-core would be the right addition in a production CI pipeline where the rule set can be tuned and violations tracked over time.
 
 ---
 
@@ -186,15 +243,15 @@ All generated code was reviewed and intentionally accepted or modified.
 | TanStack Query vs RTK | TanStack Query - clean server/UI state separation | RTK - if multiple async feature slices appear |
 | json-server vs real backend | json-server - sufficient for CRUD demo | PostgreSQL + REST/GraphQL next step |
 | No virtualization | Acceptable at 30-100 notes | `@tanstack/react-virtual` - needed beyond ~300 |
+| axe-core excluded | Targeted a11y assertions cover the key WCAG criteria; avoids false positives | Add in CI with a tuned rule set when the project scales |
 
 **Next steps with more time:**
-1. Complete CRUD UI (create note form, inline edit, delete confirmation)
-2. Activity timeline: Group notes by day using `groupNotesByDay`
-3. Keyboard navigation on the board grid (arrow keys between notes)
-4. Unit tests for `dateHelpers.ts` (`groupNotesByDay`, `formatDayLabel`, `formatTime`) — excluded from this sample due to the overhead of making `toLocaleTimeString` deterministic across environments
-5. Playwright e2e for the full filter ? sort ? clear flow
-6. Optimistic updates on mutations
-7. Responsive layout (collapsible sidebar on mobile)
+1. Activity timeline: Group notes by day using `groupNotesByDay`
+2. Keyboard navigation on the board grid (arrow keys between notes)
+3. Unit tests for `dateHelpers.ts` (`groupNotesByDay`, `formatDayLabel`, `formatTime`) — excluded from this sample due to the overhead of making `toLocaleTimeString` deterministic across environments
+4. Playwright e2e for the full filter → sort → clear flow
+5. Optimistic updates on mutations
+6. Responsive layout (collapsible sidebar on mobile)
 
 ### Time spent
 
@@ -221,4 +278,5 @@ All generated code was reviewed and intentionally accepted or modified.
 | Styling | CSS Modules |
 | API | json-server |
 | Testing | Vitest + React Testing Library |
+| E2E Testing | Playwright |
 | Linting | ESLint + typescript-eslint |
