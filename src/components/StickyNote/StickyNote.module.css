@@ -38,7 +38,7 @@
   pointer-events: none;
 }
 
-/* Note color variants — consume L0 tokens from index.css */
+/* Note color variants — consume L0 tokens from public/critical.css */
 .note--yellow { background-color: var(--color-note-yellow); }
 .note--pink   { background-color: var(--color-note-pink); }
 .note--blue   { background-color: var(--color-note-blue); }

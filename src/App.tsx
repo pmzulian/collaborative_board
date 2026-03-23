@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, lazy, Suspense } from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { queryClient } from './lib/queryClient'
@@ -6,9 +6,12 @@ import { BoardProvider } from './context/BoardProvider'
 import { BoardCanvas } from './components/BoardCanvas/BoardCanvas'
 import { FilterPanel } from './components/FilterPanel/FilterPanel'
 import { CreateNoteForm } from './components/CreateNoteForm/CreateNoteForm'
-import { ActivityTimeline } from './components/ActivityTimeline/ActivityTimeline'
 import logo from './assets/logo.svg'
 import styles from './App.module.css'
+
+const ActivityTimeline = lazy(
+  () => import('./components/ActivityTimeline/ActivityTimeline')
+)
 
 type ViewMode = 'board' | 'timeline';
 
@@ -71,7 +74,13 @@ function App() {
           <div className={styles.body}>
             <FilterPanel />
             <main className={styles.main}>
-              {viewMode === 'board' ? <BoardCanvas /> : <ActivityTimeline />}
+              {viewMode === 'board' ? (
+                <BoardCanvas />
+              ) : (
+                <Suspense fallback={<div className={styles.timelineFallback} aria-busy="true" aria-label="Loading timeline…" />}>
+                  <ActivityTimeline />
+                </Suspense>
+              )}
             </main>
           </div>
         </div>

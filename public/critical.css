@@ -1,5 +1,3 @@
-/* Global design tokens - Collaborative Board */
-
 :root {
   /* Colors */
   --color-surface:        #FAFAFA;
@@ -44,7 +42,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Reset */
 *,
 *::before,
 *::after {
