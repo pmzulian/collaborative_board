@@ -1,6 +1,6 @@
 # Collaborative Board Activity Explorer
 
-A frontend application for exploring activity on a collaborative brainstorming board. Built as part of a Mural Engineering frontend interview exercise.
+A frontend application for exploring activity on a collaborative brainstorming board.
 
 ---
 
